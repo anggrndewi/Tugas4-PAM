@@ -1,6 +1,9 @@
 import { Component } from 'react';
 import { StyleSheet, Button, View } from 'react-native';
 import FormInputText from './FormInputText';
+import {useDispatch, useSelector} from 'react-redux';
+import { setForm } from '../Informasi/ticket';
+import ticket from '../Informasi/ticket';
 
 class TampilanForm extends Component {
     Cari() {
@@ -12,13 +15,13 @@ class TampilanForm extends Component {
             <View style={styles.frame}>
                 <View style={styles.card}>
                     <View style={[styles.mb3]}>
-                        <FormInputText label="Lokasi Keberangkatan" placeholder="Masukan lokasi keberangkatan" icon="plane-departure" />
+                        <FormInputText value={ticket.lokasi} onChangeText={(value) => dispatch(setForm({key:'lokasi', value}))} label="Lokasi Keberangkatan" placeholder="Masukan lokasi keberangkatan" icon="plane-departure" />
                     </View>
                     <View style={[styles.mb3]}>
-                        <FormInputText label="Lokasi Tujuan" placeholder="Masukan lokasi tujuan" icon="plane-arrival"/>
+                        <FormInputText value={ticket.tujuan} onChangeText={(value) => dispatch(setForm({key:'tujuan', value}))} label="Lokasi Tujuan" placeholder="Masukan lokasi tujuan" icon="plane-arrival"/>
                     </View>
                     <View style={[styles.mb3]}>
-                        <FormInputText label="Tanggal Keberangkatan" placeholder="Masukan tanggal keberangkatan" icon="calendar" />
+                        <FormInputText value={ticket.tanggal} onChangeText={(value) => dispatch(setForm({key:'tanggal', value}))} label="Tanggal Keberangkatan" placeholder="Masukan tanggal keberangkatan" icon="calendar" />
                     </View>
                     <View style={[styles.mb3]}>
                         <Button title="CARI" color="#E47D24" onPress={() => this.Cari()} />
@@ -26,7 +29,13 @@ class TampilanForm extends Component {
                 </View>
             </View>
         );
+        
     }
+}
+const Forms = () => {
+    const dispatch =useDispatch()
+    const ticket = useSelector(state => state.ticket)
+
 }
 
 const styles = StyleSheet.create({
